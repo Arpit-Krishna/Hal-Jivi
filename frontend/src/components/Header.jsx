@@ -18,7 +18,7 @@ const Header = () => {
       </div>
       <div className="mx-5 flex items-center">
       <img src={user} className="h-8 mx-1.5 my-1" alt="user"/>
-        <p className="">User</p>
+        <a href="/user" className="">User</a>
       </div>
     </div>
   );
