@@ -8,11 +8,13 @@ const Header = () => {
     <div className="Navbar flex justify-between mx-3 my-4 rounded-3xl">
       <div className="flex items-center">
           <div className="">
+            <a href='/'> 
             <img src={logo} className="h-10 mx-5 my-1" alt="Hal-Jivi"/>
+            </a>
           </div>
           <div className="">
             <a className="mx-2" href="/">Home</a>
-            <a className="mx-2" href="/ecom">E-Commerc e</a>
+            <a className="mx-2" href="/ecom">E-Commerce</a>
             <a className="mx-2" href="/about">About</a>
             <a className="mx-2" href="/customercare">Customer Care</a>
           </div>
