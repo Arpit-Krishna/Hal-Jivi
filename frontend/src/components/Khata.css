@@ -3,3 +3,16 @@
     font-size: xxx-large;
     margin-bottom: 10px;
 }
+.rotate-button-clicked {
+    transform: rotate(45deg);
+    transition: 200ms;
+  }
+.unrotate {
+    transition: 200ms;
+}
+td{
+    width: 100%;
+}
+/* input{
+    color : white;
+} */
