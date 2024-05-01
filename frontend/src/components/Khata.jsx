@@ -25,10 +25,7 @@ export default function Khata() {
         <div className="absolute bottom-28 right-32 bg-[#cfc9b1] p-2 rounded-lg shadow-lg">
           <table className='table-auto mx-10 px-10'>
             <tr>
-              <td colSpan={2}><h5 className="text-2xl font-bold">Add to Khata</h5></td>
-           </tr>
-            <tr>
-              <td >
+              <td colSpan={2}>
                 <label htmlFor="name">Item Name:</label>
                 </td>
                 <td className=''>
@@ -36,15 +33,18 @@ export default function Khata() {
               </td>
             </tr>
             <tr>
-              <td >
-                <label htmlFor="quantity">Item Quantity:</label>
-                </td>
+            <td>
+                <label htmlFor="quantity">Item </label>
+            </td>
+            <td>
+              <label htmlFor="quantity"> Quantity:</label>
+            </td>
                 <td >
                 <input className = "p-1 border border-gray-950 rounded-sm bg-transparent" type="number" id="quantity" name="quantites" required/>
                 </td>
             </tr>
             <tr>
-              <td >
+            <td colSpan={2}>
                 <label htmlFor="price">Unit Price:</label>
                 </td>
                 <td >
@@ -52,14 +52,19 @@ export default function Khata() {
                 </td>
             </tr>
             <tr>
-              <td>
-                <lable htmlFor="invoice">Invoice Bill:</lable>
+              <td colSpan={2}>
+                <label htmlFor="invoice">Invoice Bill:</label>
                 </td>
-                <td className="w-96 flex justify-end px-3">
-                <input className="mx-14" type="file" id="invoice" name="invoice" required/>
+                <td className="w-96 flex justify-center px-3">
+                <input className="file block w-full text-sm text-slate-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-violet-50
+                    hover:file:bg-violet-100"  type="file" id="invoice" name="invoice" required/>
               </td>
             </tr>
-            <tr><td  colSpan={2}><button className="bg-[#e3b080] font-bold py-2 px-2 my-1 mx-1 rounded-full" type="submit">Submit</button></td></tr>
+            <tr><td  colSpan={3}><button className="bg-[#e3b080] font-bold py-2 px-2 my-1 mx-1 rounded-full" type="submit">Submit</button></td></tr>
             
           </table>
         </div>

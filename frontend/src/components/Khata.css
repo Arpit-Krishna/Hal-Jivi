@@ -10,8 +10,10 @@
 .unrotate {
     transition: 200ms;
 }
-td{
-    width: 100%;
+.file{
+    margin-left: 80px;
+    margin-top: 2px;
+
 }
 /* input{
     color : white;
