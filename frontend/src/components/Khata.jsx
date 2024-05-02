@@ -9,6 +9,23 @@ import './Khata.css'
 // });
 
 export default function Khata() {
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    // Check if the selected file type is allowed
+    if (file && isValidFileType(file.type)) {
+      setSelectedFile(file);
+    } else {
+      // Reset the file input if the file type is not allowed
+      event.target.value = null;
+      setSelectedFile(null);
+      alert('Only JPG, PNG, and PDF files are allowed.');
+    }
+  };
+  const isValidFileType = (fileType) => {
+    return ['image/jpeg', 'image/png', 'application/pdf'].includes(fileType);
+  };
 
   const [isPopupOpen, setPopupOpen] = useState(false);
 
@@ -61,7 +78,9 @@ export default function Khata() {
                     file:rounded-full file:border-0
                     file:text-sm file:font-semibold
                     file:bg-violet-50
-                    hover:file:bg-violet-100"  type="file" id="invoice" name="invoice" required/>
+                    hover:file:bg-violet-100"  
+                    accept=".jpg, .jpeg, .png, .pdf" onChange={handleFileChange}
+                    type="file" id="invoice" name="invoice" required/>
               </td>
             </tr>
             <tr><td  colSpan={3}><button className="bg-[#e3b080] font-bold py-2 px-2 my-1 mx-1 rounded-full" type="submit">Submit</button></td></tr>
