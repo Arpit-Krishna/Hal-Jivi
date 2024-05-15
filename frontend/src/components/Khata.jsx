@@ -16,6 +16,7 @@ export default function Khata() {
     // Check if the selected file type is allowed
     if (file && isValidFileType(file.type)) {
       setSelectedFile(file);
+      alert(selectedFile + " is selected as Invoice Bill.");
     } else {
       // Reset the file input if the file type is not allowed
       event.target.value = null;
