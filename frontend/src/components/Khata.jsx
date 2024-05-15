@@ -1,5 +1,5 @@
 import React, { useState }from 'react'
-import './Khata.css'
+import './style/Khata.css'
 // import web3 from './web3';
 
 // const myContract = new web3.eth.Contract(MyContract.abi, MyContract.address);
