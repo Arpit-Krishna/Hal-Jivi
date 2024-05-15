@@ -1,9 +1,10 @@
 import React from 'react'
+import Login from './Login'
 
 export default function User() {
   return (
     <div>
-      <p>USER</p>
+      <Login/>
     </div>
   )
 }
