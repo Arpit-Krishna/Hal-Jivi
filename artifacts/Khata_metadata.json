@@ -1,0 +1,258 @@
+{
+	"compiler": {
+		"version": "0.8.6+commit.11564f7e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "invoiceId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "itemName",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "itemQuantity",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "unitPrice",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "invoiceHash",
+						"type": "string"
+					}
+				],
+				"name": "InvoiceAdded",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "Kisan",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "khata_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "kisanName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "mail",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "age",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "gender",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "phNo",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_khata_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_itemName",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_itemQuantity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_unitPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_invoiceHash",
+						"type": "string"
+					}
+				],
+				"name": "addInvoice",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getKhataId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_kisanName",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_age",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_gender",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_phNo",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_mail",
+						"type": "string"
+					}
+				],
+				"name": "insertKisan",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "invoices",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "khata_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "itemName",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "itemQuantity",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "unitPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "invoiceHash",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "khata_id",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"frontend\\contracts\\Khata.sol": "Khata"
+		},
+		"evmVersion": "berlin",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"frontend\\contracts\\Khata.sol": {
+			"keccak256": "0xfc342cb60b702052e7765b0fd080d82204ae3e6747274ef2ee33dfea9f64cd65",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://45c41a4b72006cf75f47646c9ee5f466a1d74166b6f193ea3625f3419ce9b814",
+				"dweb:/ipfs/QmdYZfdMmYDoKs1VXPnoVaTXxRfWbcxTJeX7ba1WMGcvxH"
+			]
+		}
+	},
+	"version": 1
+}
