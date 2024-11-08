@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Web3 from 'web3';
 import KhataContract from './contract/MyContract.json'; // Ensure this path is correct for your ABI file

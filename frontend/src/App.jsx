@@ -6,6 +6,7 @@ import Ecommerce from './components/Ecommerce';
 import About from './components/About';
 import Customercare from './components/Customercare';
 import User from './components/User';
+
 import Signup from './components/SIgnup';
 import Login from './components/Login';
 
@@ -19,8 +20,10 @@ function App() {
               <Route path ='/about' element ={<About/>} />      
               <Route path ='/customercare' element ={<Customercare/>} />    
               <Route path ='/user' element ={<User/>} /> 
+
               <Route path ='/Login' element ={<Login/>}/>   
               <Route path ='/Signup' element ={<Signup/>}/>
+
             </Routes>
       </BrowserRouter>
     </div>
