@@ -1,141 +1,139 @@
 import React, { useState, useEffect } from 'react';
-import Web3 from 'web3';
-import KhataContract from './contract/MyContract.json';
+import './style/Signup.css'; // Assuming your CSS is in the same directory
+// import 'boxicons/css/boxicons.min.css';
 
-const infuraProjectId = '2Rbipvdcsy8gUILIOTJcvydrimM';
-const POLYGON_RPC_URL = `https://polygon-amoy.infura.io/v3/${infuraProjectId}`;
-const web3 = new Web3(window.ethereum || POLYGON_RPC_URL);
-const contract = new web3.eth.Contract(KhataContract.abi, KhataContract.address);
+function SignUp() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    contact: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    inputImage: null,
+  });
 
-export default function Signup() {
-    const [name, setName] = useState('');
-    const [age, setAge] = useState('');
-    const [gender, setGender] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [khataId, setKhataId] = useState(null);
-    const [account, setAccount] = useState('');
+  const [signUpError, setSignUpError] = useState('');
 
-    useEffect(() => {
-        if (window.ethereum) {
-            window.ethereum.request({ method: 'eth_requestAccounts' })
-                .then(accounts => {
-                    setAccount(accounts[0]);
-                })
-                .catch(error => {
-                    console.error('Error connecting to wallet:', error);
-                    alert('Please connect your wallet.');
-                });
-        } else {
-            alert('No Ethereum wallet detected. Please install MetaMask.');
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: files ? files[0] : value,
+    }));
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log('hello from custom event handle', e);
+
+    const { firstName, lastName, contact, email, password, confirmPassword, inputImage } = formData;
+
+    console.log(firstName, lastName, contact, email, password, confirmPassword, inputImage);
+
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+    } 
+    else {
+      let authData = JSON.parse(localStorage.getItem('auth')) || [];
+      let userFound = false;
+      for (let userObj of authData) {
+        if (userObj.number === contact) {
+          alert('Phone Number already exists. Please Sign In instead');
+          userFound = true;
+    
+        } 
+        else if (userObj.email === email) {
+          alert('Email already exists. Please Sign In instead');
+          userFound = true;
         }
-    }, []);
+      }
+      if (!userFound) {
+        const userDetails = {
+          'number' : contact,
+          'email' : email,
+          'password' : password,
+        };
+        authData.push(userDetails);
+        localStorage.setItem('auth', JSON.stringify(authData));
+        setFormData({
+          firstName: '',
+          lastName: '',
+          contact: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+          inputImage: null,
+        });
+        // window.location.href = 'index.html';
+      }
+    }
+  };
 
-    const handleSignup = async (e) => {
-        e.preventDefault();
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address');
-            return;
-        }
-
-        const phoneRegex = /^\d{10}$/;
-        if (!phoneRegex.test(phoneNumber)) {
-            alert('Please enter a valid 10-digit phone number');
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            alert('Passwords do not match');
-            return;
-        }
-
-        try {
-            if (!account) {
-                alert('No Ethereum account detected. Please connect your wallet.');
-                return;
-            }
-            const gasLimit = await contract.methods.insertKisan(name, parseInt(age), gender, parseInt(phoneNumber), email)
-            .estimateGas({ from: account });
-            
-            console.log(gasLimit, account);
-
-            const result = await contract.methods.insertKisan(name, parseInt(age), gender, parseInt(phoneNumber), email)
-                .send({ from: account, gas: gasLimit});
-            console.log(result);
-
-            const khataId = await contract.methods.getKhataId().call();
-            setKhataId(khataId - 1); // Subtract 1 since Khata ID is incremented after assignment
-
-            alert(`Signup successful! Your Khata ID is: ${khataId - 1}. Please remember it for future reference.`);
-        } catch (error) {
-            console.error('Error registering Kisan:', error);
-            console.log('Error object:', JSON.stringify(error, null, 2)); 
-        
-            if (error.code === 'INVALID_ARGUMENT') {
-                alert('There is an issue with the contract or the parameters you provided.');
-            } else {
-                alert('Error during signup: ' + error.message);
-            }
-        }
+  useEffect(() => {
+    const form = document.getElementById('signup-form-container-id');
+    form.addEventListener('submit', submitHandler);
+    return () => {
+      form.removeEventListener('submit', submitHandler);
     };
+  }, []);
 
-    return (
-        <div>
-            <h2>Signup</h2>
-            <form onSubmit={handleSignup}>
-                <label>
-                    Name:
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-                </label>
-                <br />
-                <label>
-                    Age:
-                    <input type="number" value={age} onChange={(e) => setAge(e.target.value)} required />
-                </label>
-                <br />
-                <label>
-                    Gender:
-                    <select value={gender} onChange={(e) => setGender(e.target.value)} required>
-                        <option value="">Select Gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </label>
-                <br />
-                <label>
-                    Phone Number:
-                    <input type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
-                </label>
-                <br />
-                <label>
-                    Email:
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                </label>
-                <br />
-                <label>
-                    Password:
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                </label>
-                <br />
-                <label>
-                    Confirm Password:
-                    <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
-                </label>
-                <br />
-                <button type="submit">Signup</button>
-            </form>
-
-            {khataId && (
-                <div>
-                    <h3>Your Khata ID: {khataId}</h3>
-                    <p>Please remember your Khata ID for future logins.</p>
+  return (
+    <div className='signup'>
+        <div className="register">
+            <h1>REGISTER</h1>
+            <form className="signup-form-container" id="signup-form-container-id" onSubmit={submitHandler}>
+                <div className="input-box">
+                    <input type="text" placeholder="First Name" name="firstName" id='first_name' value={formData.firstName} onChange={handleChange} required />
+                    <input type="text" placeholder="Last Name" name="lastName" id='last_name' value={formData.lastName} onChange={handleChange} required />
                 </div>
-            )}
+
+                <div className="contact-box">
+                    <div className="container">
+                        <div id="sender">
+                          <input type="tel" placeholder="Phone Number" name="contact" id="contact" value={formData.contact} onChange={handleChange} required />
+                          <i className="bx bxs-phone"></i>
+                          <div id="recaptcha-container"></div>
+                          <input type="button" id="send" value="Send" />
+                        </div>
+                        <div id="verifier" style={{ display: 'none' }}>
+                          <input type="text" id="verificationcode" placeholder="OTP Code" />
+                          <input type="button" id="verify" value="Verify" />
+                          <div className="p-conf">Number Verified</div>
+                          <div className="n-conf">OTP Error</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="input-box">
+                <input type="email" placeholder="Email" name="email" value={formData.email} onChange={handleChange} required />
+                <i className="bx bxs-envelope"></i>
+                </div>
+                <div className="input-box">
+                <input type="password" placeholder="Password" name="password" value={formData.password} onChange={handleChange} required />
+                <i className="bx bxs-lock-alt"></i>
+                </div>
+                <div className="input-box">
+                <input type="password" placeholder="Confirm Password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
+                <i className="bx bxs-lock-alt"></i>
+                </div>
+                <div className="imageInput">
+                <h4 id="tex">Profile Picture: </h4>
+                <label htmlFor="img">Upload</label>
+                <input type="file" accept="image/*" id="img" name="inputImage" onChange={handleChange} required />
+                </div>
+                <button type="submit" className="signup-btn" id="signup-btn">Register</button>
+
+                <div id="sign_up_error">{signUpError}</div>
+
+                <div className="back-login">
+                <a>Have already an account ?</a>
+                <a href="/login">Login here</a>
+                </div>
+            </form>
         </div>
-    );
+    </div>
+  );
 }
+
+export default SignUp;
