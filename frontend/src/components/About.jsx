@@ -99,15 +99,15 @@ export default function About() {
 
     const developers = [
         {
-            name: 'Avantika Bajpai (Leader)',
-            description: 'Expert in project management and full-stack development, guiding the team towards success.',
-            imageUrl: require('./assets/Avantika_Bajpai-Hal_Jivi.jpg'),
+            name: 'Arpit Krishna (Leader)',
+            description: 'Backend specialist focused on building scalable and efficient server-side applications.',
+            imageUrl: require('./assets/Arpit_Krishna-Hal_Jivi.jpg'),
             isLeader: true,
         },
         {
-            name: 'Arpit Krishna',
-            description: 'Backend specialist focused on building scalable and efficient server-side applications.',
-            imageUrl: require('./assets/Arpit_Krishna-Hal_Jivi.jpg'),
+            name: 'Avantika Bajpai',
+            description: 'Expert in project management and full-stack development, guiding the team towards success.',
+            imageUrl: require('./assets/Avantika_Bajpai-Hal_Jivi.jpg'),
             isLeader: false,
         },
         {

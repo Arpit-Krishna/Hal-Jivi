@@ -1,15 +1,5 @@
-/* .button{
-    color : #cfc9b1;
-    font-size: xxx-large;
-    margin-bottom: 10px;
-}
-.rotate-button-clicked {
-    transform: rotate(45deg);
-    transition: 200ms;
-  }
-.unrotate {
-    transition: 200ms;
-}
+/* 
+
 .file{
     margin-left: 80px;
     margin-top: 2px;
@@ -18,3 +8,15 @@
 /* input{
     color : white;
 } */ */
+.Button{
+    color : #cfc9b1;
+    font-size: xxx-large;
+    margin-bottom: 10px;
+}
+.rotate-Button-clicked {
+    transform: rotate(45deg);
+    transition: 200ms;
+  }
+.unrotate {
+    transition: 200ms;
+}
