@@ -133,7 +133,7 @@ console.log('IPFS Client:', ipfsClient);
 
 function App() {
     return (
-        <div className="App" style={{ backgroundColor: '#181818', color: '#ffffff', minHeight: '100vh' }}>
+        <div className="App py-5" style={{ backgroundColor: '#000000', color: '#ffffff', minHeight: '100vh' }}>
             <Header />
             <BrowserRouter>
                 <div style={{ padding: '20px' }}>

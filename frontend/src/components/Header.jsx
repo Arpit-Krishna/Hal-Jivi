@@ -45,7 +45,7 @@ import search from './assets/search.gif';
 
 const Header = () => {
   return (
-    <div className="Navbar flex justify-between items-center mx-3 my-0.4 p-4 rounded-3xl bg-gray-800 shadow-lg">
+    <div className="Navbar flex justify-between items-center mx-3 my-3 px-4 rounded-3xl bg-gray-800 shadow-lg">
       <div className="flex items-center">
         <div>
           <a href='/'> 

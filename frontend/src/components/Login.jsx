@@ -361,6 +361,7 @@ export default function Login() {
           />
           <span
             onClick={() => setShowPassword(!showPassword)}
+            className = 'my-3'
             style={styles.passwordToggle}
           >
             {showPassword ? 'Hide' : 'Show'}
