@@ -69,7 +69,7 @@ export default function Login() {
     passwordToggle: {
       position: "absolute",
       right: "15px",
-      top: "13px",
+      top: "23px",
       cursor: "pointer",
       color: "#00adb5",
     },
