@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function DailyNews() {
   const [news, setNews] = useState([]);
@@ -6,70 +6,109 @@ function DailyNews() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchNews = async () => {
+    async function fetchNews() {
+      setLoading(true);
       try {
         const response = await fetch(
-          `https://newsapi.org/v2/top-headlines?country=in&q=agriculture&apiKey=6b8a186ae09e41598cc1f89493b46f4a`
+          `https://api.currentsapi.services/v1/latest-news?country=in&language=en&apiKey=-ruj7Zm3Ihg20D7eyprm3uVKHtZc-mWLw-9nUk-YqIH2bJJW`
         );
         const data = await response.json();
-        if (data.status === 'ok' && data.articles.length > 0) {
-          setNews(data.articles.slice(0, 5));
+        
+        if (data.news) {
+          setNews(data.news.slice(0, 5));
         } else {
-          const fallbackResponse = await fetch(
-            `https://newsapi.org/v2/top-headlines?country=in&apiKey=6b8a186ae09e41598cc1f89493b46f4a`
-          );
-          const fallbackData = await fallbackResponse.json();
-          if (fallbackData.status === 'ok') {
-            setNews(fallbackData.articles.slice(0, 5));
-          } else {
-            throw new Error('Unable to fetch fallback news');
-          }
+          setNews([]);
         }
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching news:", err);
+        setError("Failed to load news. Please try again later.");
       }
-    };
+      setLoading(false);
+    }
 
     fetchNews();
   }, []);
 
-  if (loading) {
-    return <div>Loading news...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  if (loading) return <p>Loading news...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
-    <div style={{ backgroundColor: '#262626', padding: '20px', borderRadius: '8px', marginTop: '20px', width: '80%' }}>
-      <h2 style={{ color: '#00adb5', fontSize: '24px', textAlign: 'center', marginBottom: '10px' }}>
-        Daily Indian Agricultural News
-      </h2>
-      {news.length === 0 ? (
-        <div>No news available at the moment.</div>
-      ) : (
+    <div style={styles.newsContainer}>
+      <h2 style={styles.newsTitle}>Latest Agriculture News</h2>
+      {news.length > 0 ? (
         news.map((article, index) => (
-          <div key={index} style={{ color: '#ffffff', marginBottom: '15px' }}>
-            {article.urlToImage && (
-              <img
-                src={article.urlToImage}
-                alt={article.title}
-                style={{ width: '100%', borderRadius: '8px', marginBottom: '10px' }}
-              />
+          <div key={index} style={styles.article}>
+            {article.image && (
+              <img src={article.image} alt="News" style={styles.image} />
             )}
-            <h3>{article.title}</h3>
-            <p>{article.description}</p>
-            <a href={article.url} target="_blank" rel="noopener noreferrer" style={{ color: '#00adb5' }}>
-              Read more
-            </a>
+            <div style={styles.articleContent}>
+              <h3 style={styles.headline}>{article.title}</h3>
+              <p style={styles.description}>{article.description}</p>
+              <a href={article.url} target="_blank" rel="noopener noreferrer" style={styles.link}>
+                Read more
+              </a>
+            </div>
           </div>
         ))
+      ) : (
+        <p>No news available at the moment.</p>
       )}
     </div>
   );
 }
+
+const styles = {
+  newsContainer: {
+    backgroundColor: '#121212',
+    color: '#e0e0e0',
+    padding: '15px',
+    borderRadius: '8px',
+    width: '80%',
+    margin: '20px auto',
+  },
+  newsTitle: {
+    fontSize: '36px',
+    marginBottom: '20px',
+    color: '#00adb5',
+    textAlign: 'center',
+    margin: '20px 0',
+    fontWeight: 'bold',
+    textShadow: '2px 2px 6px rgba(0, 0, 0, 0.5)',
+  },
+  article: {
+    display: 'flex',
+    marginBottom: '20px',
+    padding: '15px',
+    borderRadius: '8px',
+    backgroundColor: '#333',
+    background: 'linear-gradient(135deg, #111, #444)',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.7)',
+  },
+  image: {
+    width: '150px',
+    height: '100px',
+    marginRight: '15px',
+    borderRadius: '8px',
+    objectFit: 'cover',
+  },
+  articleContent: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  headline: {
+    fontSize: '18px',
+    color: '#00adb5',
+    marginBottom: '10px',
+  },
+  description: {
+    fontSize: '16px',
+    marginBottom: '10px',
+  },
+  link: {
+    color: '#00adb5',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+  },
+};
 
 export default DailyNews;
