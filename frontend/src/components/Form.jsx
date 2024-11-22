@@ -126,7 +126,7 @@ function Form({ onCitySubmit }) {
       />
       
       <button type="submit" style={styles.submitButton}>
-        Get Weather Info
+        Submit
       </button>
     </form>
   );

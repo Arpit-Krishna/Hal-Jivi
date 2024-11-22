@@ -32,25 +32,34 @@ function MSP() {
     },
     content: {
       display: 'flex',
-      justifyContent: 'space-between',
-      gap: '20px',
-      flexWrap: 'wrap',
+      flexDirection: 'column',
+      gap: '30px',
       maxWidth: '1200px',
       width: '100%',
-      marginTop: '40px',
+      marginTop: '20px',
     },
-    weatherCalculationContainer: {
+    weatherSection: {
       display: 'flex',
-      flexDirection: 'column',
-      gap: '20px',
-      width: '35%',
-      minWidth: '280px',
+      justifyContent: 'center',
+      width: '50%',
+      margin: '0 auto',
     },
-    sectionTitle: {
-      fontSize: '24px',
-      color: '#00adb5',
-      marginBottom: '15px',
+    weatherBox: {
+      width: '60%',
+      minWidth: '280px',
+      maxWidth: '600px',
       textAlign: 'center',
+    },
+    formCalcContainer: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      gap: '20px',
+      width: '100%',
+    },
+    formCalcBox: {
+      flex: '1',
+      minWidth: '280px',
+      maxWidth: '500px',
     },
     khataButton: {
       position: 'fixed',
@@ -69,10 +78,6 @@ function MSP() {
       cursor: 'pointer',
       transition: 'all 0.3s ease',
     },
-    khataButtonHover: {
-      backgroundColor: '#009a9c',
-      transform: 'scale(1.1)',
-    },
   };
 
   return (
@@ -80,26 +85,24 @@ function MSP() {
       <h1 style={styles.title}>Minimum Support Price (MSP) Dashboard</h1>
 
       <div style={styles.content}>
-        <div style={{ width: '48%', minWidth: '280px' }}>
-          {/* <h2 style={styles.sectionTitle}>Form Input</h2> */}
-          <Form onCitySubmit={handleCitySubmit} />
-        </div>
-
-        <div style={styles.weatherCalculationContainer}>
-          <div style={{ width: '100%' }}>
-            {/* <h2 style={styles.sectionTitle}>Weather Details</h2> */}
+        <div style={styles.weatherSection}>
+          <div style={styles.weatherBox}>
             <Weather city={city} />
           </div>
+        </div>
 
-          <div style={{ width: '100%' }}>
-            {/* <h2 style={styles.sectionTitle}>MSP Calculation</h2> */}
+        <div style={styles.formCalcContainer}>
+          <div style={styles.formCalcBox}>
+            <Form onCitySubmit={handleCitySubmit} />
+          </div>
+          <div style={styles.formCalcBox}>
             <Calculation />
           </div>
         </div>
       </div>
 
       <div>
-        <Khata/>
+        <Khata />
       </div>
     </div>
   );

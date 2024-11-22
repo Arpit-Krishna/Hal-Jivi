@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 function Calculation() {
   const [weights, setWeights] = useState({
-    W1: 0.4,
-    W2: 0.2,
-    W3: 0.1,
-    W4: 0.2,
-    W5: 0.1,
+    W1: 0,
+    W2: 0,
+    W3: 0,
+    W4: 0,
+    W5: 0,
   });
 
   const [data, setData] = useState({
@@ -15,7 +15,10 @@ function Calculation() {
     WDI: 0,
     MDI: 0,
     RRI: 0,
+    inflation: 0,
   });
+
+  const [result, setResult] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,11 +28,21 @@ function Calculation() {
     }));
   };
 
+  const handleWeightChange = (e) => {
+    const { name, value } = e.target;
+    setWeights((prevWeights) => ({
+      ...prevWeights,
+      [name]: parseFloat(value),
+    }));
+  };
+
   const calculateMSP = () => {
     const { W1, W2, W3, W4, W5 } = weights;
-    const { C2, RPI, WDI, MDI, RRI } = data;
-    const MSP = (W1 * C2) + (W2 * RPI) + (W3 * WDI * C2) + (W4 * MDI * C2) + (W5 * RRI * C2);
-    return MSP.toFixed(2);
+    const { C2, RPI, WDI, MDI, RRI, inflation } = data;
+
+    const baseMSP = (W1 * C2) + (W2 * RPI) + (W3 * WDI) + (W4 * MDI) + (W5 * RRI);
+    const finalMSP = baseMSP + inflation;
+    setResult(finalMSP.toFixed(2));
   };
 
   const styles = {
@@ -69,23 +82,83 @@ function Calculation() {
       border: '2px solid #555',
       fontSize: '1rem',
     },
-    result: {
-      color: '#fff',
-      marginTop: '20px',
+    button: {
       backgroundColor: '#00adb5',
+      color: '#fff',
+      border: 'none',
+      borderRadius: '5px',
       padding: '10px 20px',
-      borderRadius: '15px',
-      fontWeight: 'bold',
       fontSize: '1rem',
+      fontWeight: 'bold',
       cursor: 'pointer',
-      width: '100%',
       transition: 'background-color 0.3s',
+      marginTop: '10px',
+    },
+    resultBox: {
+      backgroundColor: '#1e1e1e',
+      color: '#00adb5',
+      padding: '15px',
+      marginTop: '15px',
+      borderRadius: '10px',
+      textAlign: 'center',
+      fontWeight: 'bold',
+      width: '100%',
     },
   };
 
   return (
     <div style={styles.container}>
       <h3 style={styles.heading}>Calculate MSP</h3>
+
+      <label style={styles.label}>Weight for C2 (W1):</label>
+      <input
+        type="number"
+        name="W1"
+        value={weights.W1}
+        onChange={handleWeightChange}
+        style={styles.input}
+        placeholder="Enter W1 value"
+      />
+
+      <label style={styles.label}>Weight for RPI (W2):</label>
+      <input
+        type="number"
+        name="W2"
+        value={weights.W2}
+        onChange={handleWeightChange}
+        style={styles.input}
+        placeholder="Enter W2 value"
+      />
+
+      <label style={styles.label}>Weight for WDI (W3):</label>
+      <input
+        type="number"
+        name="W3"
+        value={weights.W3}
+        onChange={handleWeightChange}
+        style={styles.input}
+        placeholder="Enter W3 value"
+      />
+
+      <label style={styles.label}>Weight for MDI (W4):</label>
+      <input
+        type="number"
+        name="W4"
+        value={weights.W4}
+        onChange={handleWeightChange}
+        style={styles.input}
+        placeholder="Enter W4 value"
+      />
+
+      <label style={styles.label}>Weight for RRI (W5):</label>
+      <input
+        type="number"
+        name="W5"
+        value={weights.W5}
+        onChange={handleWeightChange}
+        style={styles.input}
+        placeholder="Enter W5 value"
+      />
 
       <label style={styles.label}>Comprehensive Cost of Production (C2):</label>
       <input
@@ -137,9 +210,25 @@ function Calculation() {
         placeholder="Enter RRI value"
       />
 
-      <div style={styles.result}>
-        <strong>Calculated MSP:</strong> ₹{calculateMSP()} per quintal
-      </div>
+      <label style={styles.label}>Inflation (additional cost):</label>
+      <input
+        type="number"
+        name="inflation"
+        value={data.inflation}
+        onChange={handleInputChange}
+        style={styles.input}
+        placeholder="Enter inflation value"
+      />
+
+      <button style={styles.button} onClick={calculateMSP}>
+        Calculate MSP
+      </button>
+
+      {result && (
+        <div style={styles.resultBox}>
+          <strong>Calculated MSP: ₹{result} per quintal</strong>
+        </div>
+      )}
     </div>
   );
 }
