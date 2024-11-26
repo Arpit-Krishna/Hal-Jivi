@@ -16,7 +16,8 @@ const Header = () => {
 
   return (
     <>
-      <div className="navbar flex justify-between items-center mx-3 my-0.4 p-4 rounded-3xl bg-gray-800 shadow-lg">
+    <br/>
+      <div className="navbar flex justify-between items-center mx-3 p-4 h-12 rounded-3xl bg-gray-800 shadow-lg">
         <div className="flex items-center">
         <div>
           <a href='/'> 
