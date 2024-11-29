@@ -31,7 +31,7 @@ export default function ImageCarousel({ images }) {
       width: '100%',
       height: '400px',
       objectFit: 'cover',
-      flexShrink: 0, // Ensures only one image takes up space at a time
+      flexShrink: 0,
     },
     navButtons: {
       position: 'absolute',
