@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "ethereumjs-abi": "git+https://github.com/ethereumjs/ethereumjs-abi.git",
   "dependencies": {
     "@material-tailwind/react": "^2.1.9",
     "@testing-library/jest-dom": "^5.17.0",

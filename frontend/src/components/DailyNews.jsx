@@ -10,7 +10,7 @@ function DailyNews() {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://api.currentsapi.services/v1/latest-news?country=in&language=en&apiKey=-ruj7Zm3Ihg20D7eyprm3uVKHtZc-mWLw-9nUk-YqIH2bJJW`
+          `https://api.currentsapi.services/v1/latest-news?category=agriculture&apiKey=-ruj7Zm3Ihg20D7eyprm3uVKHtZc-mWLw-9nUk-YqIH2bJJW`
         );
         const data = await response.json();
         
