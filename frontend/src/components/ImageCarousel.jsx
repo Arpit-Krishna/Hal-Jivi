@@ -3,10 +3,12 @@ import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 
 export default function ImageCarousel({ images }) {
   let [current, setCurrent] = useState(0);
+
   let prevSlide = () => {
     if (current === 0) setCurrent(images.length - 1);
     else setCurrent(current - 1);
   };
+
   let nextSlide = () => {
     if (current === images.length - 1) setCurrent(0);
     else setCurrent(current + 1);
@@ -29,6 +31,7 @@ export default function ImageCarousel({ images }) {
       width: '100%',
       height: '400px',
       objectFit: 'cover',
+      flexShrink: 0,
     },
     navButtons: {
       position: 'absolute',
