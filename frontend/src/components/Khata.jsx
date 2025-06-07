@@ -1,6 +1,6 @@
+// Khata.jsx
 import React, { useState } from 'react';
 import Web3 from 'web3';
-import './style/Khata.css';
 import KhataContract from './contract/MyContract.json';
 import { uploadToIPFS, getFromIPFS } from './ipfs';
 
@@ -18,18 +18,12 @@ export default function Khata() {
   const [invoiceIndex, setInvoiceIndex] = useState(null);
   const [invoiceDetails, setInvoiceDetails] = useState(null);
   const [isPopupOpen, setPopupOpen] = useState(false);
-  const [isRotated, setIsRotated] = useState(false);
-
-  const togglePopup = () => {
-    setPopupOpen(!isPopupOpen);
-    setIsRotated(!isRotated);
-  };
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file && isValidFileType(file.type)) {
       setSelectedFile(file);
-      alert(`${file.name} is selected as Invoice Bill.`);
+      alert(file.name + ' is selected as Invoice Bill.');
     } else {
       event.target.value = null;
       setSelectedFile(null);
@@ -76,6 +70,10 @@ export default function Khata() {
     }
   };
 
+  const togglePopup = () => {
+    setPopupOpen(!isPopupOpen);
+  };
+
   const styles = {
     container: {
       position: 'fixed',
@@ -91,87 +89,82 @@ export default function Khata() {
       backgroundColor: '#3a3a3a',
       borderRadius: '50%',
       cursor: 'pointer',
-      transition: 'transform 0.3s, background-color 0.3s',
-    },
-    buttonText: {
-      color: '#cfc9b1',
-      fontSize: 'xxx-large',
-      transition: 'transform 0.3s',
-    },
-    rotatedText: {
-      transform: 'rotate(45deg)',
+      transition: 'background-color 0.3s',
     },
     popup: {
       position: 'absolute',
       bottom: '100px',
       right: '40px',
-      backgroundColor: '#2b2b2b',
+      backgroundColor: '#1f1f1f',
       padding: '10px',
       borderRadius: '10px',
+      background: 'linear-gradient(135deg, #111, #444)',
       boxShadow: '0 4px 10px rgba(0,0,0,0.5)',
       color: '#fff',
     },
     input: {
       padding: '5px',
-      border: '1px solid #555',
+      border: '3px solid #555',
       borderRadius: '5px',
       backgroundColor: '#1f1f1f',
       color: '#fff',
       width: '100%',
     },
     submitButton: {
-      backgroundColor: '#4a4a4a',
-      fontWeight: 'bold',
-      padding: '10px',
-      margin: '5px 0',
-      borderRadius: '20px',
+      padding: '10px 20px',
+      backgroundColor: '#00adb5',
       border: 'none',
+      borderRadius: '15px',
+      color: 'white',
+      fontWeight: 'bold',
+      fontSize: '1rem',
       cursor: 'pointer',
       width: '100%',
-      color: '#fff',
+      transition: 'background-color 0.3s',
+      margin: '5px 0',
     },
     getInvoiceButton: {
-      backgroundColor: '#4a4a4a',
-      fontWeight: 'bold',
-      padding: '10px',
-      margin: '5px 0',
-      borderRadius: '20px',
+      padding: '10px 20px',
+      backgroundColor: '#00adb5',
       border: 'none',
+      borderRadius: '15px',
+      color: 'white',
+      fontWeight: 'bold',
+      fontSize: '1rem',
       cursor: 'pointer',
       width: '100%',
-      color: '#fff',
+      transition: 'background-color 0.3s',
+      margin: '5px 0',
     },
     invoiceDetail: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      margin: '5px 0',
+      display: 'block',
+      margin: '10px 0',
       fontSize: '1rem',
+      padding: '10px',
+      backgroundColor: '#3a3a3a',
+      borderRadius: '8px',
+      color: '#fff',
+    },
+    label: {
+      display: 'block',
+      fontSize: '1rem',
+      marginBottom: '5px',
     },
   };
 
   return (
     <div style={styles.container}>
       <div style={styles.button} onClick={togglePopup}>
-        <h1
-          style={{
-            ...styles.buttonText,
-            ...(isRotated ? styles.rotatedText : {}),
-            fontSize: 60,
-            color: 'white',
-            marginTop: -12,
-          }}
-        >
-          +
-        </h1>
+        <h1 style={{ color: 'white' }}>+</h1>
       </div>
-        {isPopupOpen && (
+      {isPopupOpen && (
         <div style={styles.popup}>
           <form onSubmit={handleSubmit}>
             <table className='table-auto mx-10 px-10'>
               <tbody>
                 <tr>
                   <td colSpan={2}>
-                    <label htmlFor="name" style={{ color: '#fff' }}>Item Name:</label>
+                    <label htmlFor="name" style={{ color: '#00adb5' }}>Item Name:</label>
                   </td>
                   <td>
                     <input
@@ -187,7 +180,7 @@ export default function Khata() {
                 </tr>
                 <tr>
                   <td colSpan={2}>
-                    <label htmlFor="quantity" style={{ color: '#fff' }}>Item Quantity:</label>
+                    <label htmlFor="quantity" style={{ color: '#00adb5' }}>Item Quantity:</label>
                   </td>
                   <td>
                     <input
@@ -203,7 +196,7 @@ export default function Khata() {
                 </tr>
                 <tr>
                   <td colSpan={2}>
-                    <label htmlFor="price" style={{ color: '#fff' }}>Unit Price:</label>
+                    <label htmlFor="price" style={{ color: '#00adb5' }}>Unit Price:</label>
                   </td>
                   <td>
                     <input
@@ -219,7 +212,7 @@ export default function Khata() {
                 </tr>
                 <tr>
                   <td colSpan={2}>
-                    <label htmlFor="invoice" style={{ color: '#fff' }}>Invoice Bill:</label>
+                    <label htmlFor="invoice" style={{ color: '#00adb5' }}>Invoice Bill:</label>
                   </td>
                   <td className="w-96 flex justify-center px-3">
                     <input
@@ -251,6 +244,7 @@ export default function Khata() {
               </tbody>
             </table>
           </form>
+
           <div className="mt-4">
             <input
               style={styles.input}
@@ -266,23 +260,24 @@ export default function Khata() {
               Get Invoice
             </button>
           </div>
+
           {invoiceDetails && (
-            <div className="mt-4" style={{ color: '#fff' }}>
-              <h3>Invoice Details:</h3>
+            <div className="mt-4">
+              <h3 style={{ color: '#fff', marginBottom: '10px' }}>Invoice Details:</h3>
               <div style={styles.invoiceDetail}>
-                <span>Item Name:</span>
+                <label>Item Name:</label>
                 <span>{invoiceDetails[0]}</span>
               </div>
               <div style={styles.invoiceDetail}>
-                <span>Item Quantity:</span>
+                <label>Item Quantity:</label>
                 <span>{invoiceDetails[1]}</span>
               </div>
               <div style={styles.invoiceDetail}>
-                <span>Unit Price:</span>
+                <label>Unit Price:</label>
                 <span>{invoiceDetails[2]}</span>
               </div>
               <div style={styles.invoiceDetail}>
-                <span>Invoice Hash:</span>
+                <label>Invoice Bill:</label>
                 <span>{invoiceDetails[3]}</span>
               </div>
             </div>
@@ -292,6 +287,3 @@ export default function Khata() {
     </div>
   );
 }
-
-      
-       

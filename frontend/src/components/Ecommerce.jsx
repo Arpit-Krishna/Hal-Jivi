@@ -31,24 +31,27 @@
 
 
 import React from 'react';
-import Khata from './Khata';
 
 const Ecommerce = () => {
   const styles = {
     container: {
       padding: '20px',
-      backgroundColor: '#1a1a1a',
-      color: '#ffffff',
+      backgroundColor: '#121212',
+      color: '#e0e0e0',
       borderRadius: '15px',
-      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.7)',
       width: '80%',
       margin: '0 auto',
+      background: 'linear-gradient(135deg, #111, #444)',
+      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.7)',
     },
     heading: {
-      fontSize: '2.5rem',
+      fontSize: '36px',
       marginBottom: '20px',
       color: '#00adb5',
       textAlign: 'center',
+      margin: '20px 0',
+      fontWeight: 'bold',
+      textShadow: '2px 2px 6px rgba(0, 0, 0, 0.5)',
     },
     sectionContainer: {
       marginTop: '40px',
@@ -110,7 +113,6 @@ const Ecommerce = () => {
   return (
     <div style={styles.container}>
       <p style={styles.heading}>Essential Farming Products for E-Commerce</p>
-
       {categories.map((category, index) => (
         <div key={index} style={styles.sectionContainer}>
           <p style={styles.sectionHeading}>{category.name}</p>
@@ -126,8 +128,6 @@ const Ecommerce = () => {
           {index < categories.length - 1 && <div style={styles.partitionLine}></div>}
         </div>
       ))}
-
-      <Khata />
     </div>
   );
 };

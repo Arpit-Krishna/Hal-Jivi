@@ -29,7 +29,7 @@ export default function Footer() {
     return (
         <footer style={styles.footer}>
             <p style={styles.paragraph}>&copy; {new Date().getFullYear()} Hal Jivi. All rights reserved.</p>
-            <p style={styles.paragraph}>Follow us on: <a href="#" style={{ color: '#00adb5' }}>Twitter</a>, <a href="#" style={{ color: '#00adb5' }}>Facebook</a>, <a href="#" style={{ color: '#00adb5' }}>Instagram</a></p>
+            <p style={styles.paragraph}>Follow us on: <a href="https:twitter.com" style={{ color: '#00adb5' }}>Twitter</a>, <a href="https:facebook.com" style={{ color: '#00adb5' }}>Facebook</a>, <a href="https:instagram.com" style={{ color: '#00adb5' }}>Instagram</a></p>
             <div style={styles.watermark}>Hal Jivi</div> {}
         </footer>
     );
